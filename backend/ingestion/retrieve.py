@@ -36,6 +36,7 @@ _NORMALISED_SCHEME_KEYS = (
     "landholding_max_hectares",
     "gender",
     "official_source_url",
+    "fallback_documents",
 )
 
 _client: Optional["chromadb.ClientAPI"] = None
@@ -84,6 +85,13 @@ def query_schemes(text: str, n_results: int = 5, where: Optional[dict] = None) -
         except (TypeError, json.JSONDecodeError):
             logger.warning("Could not deserialise required_documents for %s", scheme_id)
             record["required_documents"] = []
+
+        raw_fallback = metadata.get("fallback_documents")
+        try:
+            record["fallback_documents"] = json.loads(raw_fallback) if raw_fallback else []
+        except (TypeError, json.JSONDecodeError):
+            logger.warning("Could not deserialise fallback_documents for %s", scheme_id)
+            record["fallback_documents"] = []
 
         record["distance"] = distance
         output.append(record)

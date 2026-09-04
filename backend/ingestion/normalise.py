@@ -22,6 +22,12 @@ target_beneficiaries has no direct source field in the raw data. It is
 derived from eligibility_structured.occupation plus a handful of category
 tags mapped to human-readable beneficiary phrases (e.g. "women_empowerment"
 -> "women"). This is a heuristic, not a sourced field.
+
+fallback_documents (Rung 9) is derived from a flat, scheme-agnostic
+primary-doc -> acceptable-alternatives map (_FALLBACK_DOCUMENT_MAP below),
+matched against each scheme's own required_documents. This is deliberately
+a general fallback registry, not per-scheme fabrication: if a scheme's
+required documents don't intersect the map, its fallback_documents is [].
 """
 
 import logging
@@ -47,6 +53,8 @@ class NormalisedScheme(TypedDict):
     landholding_max_hectares: Optional[float]
     gender: Optional[str]
     official_source_url: str
+    # list of {"primary_doc": str, "acceptable_alternatives": list[str]}
+    fallback_documents: list[dict]
 
 
 _VALID_CATEGORIES = (
@@ -100,6 +108,29 @@ _TAG_TO_BENEFICIARY_PHRASE = {
     "tribal_welfare": "tribal communities",
     "farmer_welfare": "farmers",
 }
+
+
+# Flat, scheme-agnostic fallback registry (Rung 9): if a scheme requires
+# `primary_doc` and the citizen doesn't have it, any document in
+# `acceptable_alternatives` is an admissible substitute. Deliberately a
+# general map maintained once, not something derived per scheme.
+_FALLBACK_DOCUMENT_MAP: dict[str, list[str]] = {
+    "land_patta_documents": ["chitta_adangal", "village_adangal"],
+    "income_certificate": ["salary_slip", "itr_filing"],
+    "ration_card": ["bpl_certificate", "aay_card"],
+    "domicile_certificate": ["aadhaar_utility_bill_12mo"],
+}
+
+
+def _derive_fallback_documents(required_documents: list) -> list:
+    fallback_documents = []
+    for doc in required_documents or []:
+        alternatives = _FALLBACK_DOCUMENT_MAP.get(doc)
+        if alternatives:
+            fallback_documents.append(
+                {"primary_doc": doc, "acceptable_alternatives": list(alternatives)}
+            )
+    return fallback_documents
 
 
 def _to_int(value) -> Optional[int]:
@@ -186,6 +217,7 @@ def normalise_scheme(raw: dict, batch_name: str) -> NormalisedScheme:
         landholding_max_hectares=_to_float(eligibility.get("max_landholding_hectares")),
         gender=eligibility.get("gender"),
         official_source_url=raw.get("official_source_url") or "",
+        fallback_documents=_derive_fallback_documents(required_documents),
     )
 
 

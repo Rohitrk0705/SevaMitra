@@ -16,7 +16,7 @@ from backend.mocks.models import (
 )
 from backend.mocks.fixtures import (
     AADHAAR_RECORDS, DIGILOCKER_DOCUMENTS,
-    SUBMITTED_APPLICATIONS, ALWAYS_PENDING_FOR_DEMO,
+    SUBMITTED_APPLICATIONS, PERSONA_STATUS_OUTCOME,
 )
 
 
@@ -101,7 +101,7 @@ def get_application_status(application_id: str) -> ApplicationStatusResponse:
         raise HTTPException(status_code=404, detail=f"Application {application_id} not found")
     submitted_at = datetime.fromisoformat(record["submitted_at"])
     days_since = (datetime.now(timezone.utc) - submitted_at).days
-    status = "pending" if ALWAYS_PENDING_FOR_DEMO else record["status"]
+    status = PERSONA_STATUS_OUTCOME.get(record["aadhaar_number"], record["status"])
     return ApplicationStatusResponse(
         application_id=application_id,
         scheme_id=record["scheme_id"],

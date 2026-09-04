@@ -56,6 +56,9 @@ def run_ingestion() -> int:
 
             metadata = dict(scheme)
             metadata["required_documents"] = json.dumps(metadata["required_documents"])
+            # Chroma metadata values must be str/int/float/bool — a list of
+            # dicts isn't valid, same reason required_documents is dumped above.
+            metadata["fallback_documents"] = json.dumps(metadata["fallback_documents"])
             metadata = {k: v for k, v in metadata.items() if v is not None}
 
             ids.append(scheme["scheme_id"])

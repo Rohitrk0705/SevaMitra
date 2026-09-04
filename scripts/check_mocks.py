@@ -29,13 +29,13 @@ def test_aadhaar_verify_unknown():
     print("✓ /aadhaar/verify (unknown): not_found")
 
 
-def test_digilocker_rekha_has_expired_income_cert():
+def test_digilocker_rekha_has_current_income_cert():
     r = client.get(f"/digilocker/documents/{REKHA_AADHAAR}")
     assert r.status_code == 200
     docs = r.json()["documents"]
     income_cert = next(d for d in docs if d["document_type"] == "income_certificate")
-    assert income_cert["status"] == "expired"
-    print(f"✓ /digilocker (Rekha): found expired income cert issued {income_cert['issued_at']}")
+    assert income_cert["status"] == "valid"
+    print(f"✓ /digilocker (Rekha): found current income cert issued {income_cert['issued_at']}")
 
 
 def test_digilocker_rajesh_has_land_records():
@@ -62,15 +62,15 @@ def test_application_submit_and_status():
     status = client.get(f"/applications/status/{app_id}")
     assert status.status_code == 200
     body = status.json()
-    assert body["status"] == "pending"  # ALWAYS_PENDING_FOR_DEMO
-    print(f"✓ /applications/status: {body['status']} (this pending state is what triggers RTI escalation)")
+    assert body["status"] == "approved"  # PERSONA_STATUS_OUTCOME[RAJESH_AADHAAR]
+    print(f"✓ /applications/status: {body['status']} (Rajesh's persona always approves once checked)")
 
 
 if __name__ == "__main__":
     test_health()
     test_aadhaar_verify_known()
     test_aadhaar_verify_unknown()
-    test_digilocker_rekha_has_expired_income_cert()
+    test_digilocker_rekha_has_current_income_cert()
     test_digilocker_rajesh_has_land_records()
     test_application_submit_and_status()
     print("\nAll mock endpoint tests passed.")
