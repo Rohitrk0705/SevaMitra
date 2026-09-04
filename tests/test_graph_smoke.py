@@ -5,11 +5,14 @@ Lightweight smoke test for the SevaMithra LangGraph orchestrator: proves the
 graph compiles and every node writes an exact SchemePhase / current_phase
 Literal from backend/state.py (Rung 8 schema-drift reconciliation).
 
-discovery_node is monkeypatched to a deterministic stub so this test stays
-fast and offline (no ChromaDB or Featherless calls) and doesn't depend on
-Discovery's real matching behavior — that's covered separately by
-tests/test_discovery_agent.py. Full pipeline coverage (checkpoint
-persistence, pause/resume) lives in backend/graph/tests/test_graph.py.
+discovery_node, verification_node, and execution_node are all monkeypatched
+to deterministic stubs (Rung 9: the latter two now wrap real Validator/
+Filler logic) so this test stays fast and offline — no ChromaDB or
+Featherless calls — and doesn't depend on any agent's real behavior,
+which is covered separately by tests/test_discovery_agent.py,
+tests/test_validator_agent.py, and tests/test_filler_agent.py. Full
+pipeline coverage (checkpoint persistence, pause/resume) lives in
+backend/graph/tests/test_graph.py.
 """
 
 import sys
@@ -47,6 +50,43 @@ def _fake_discovery_node(state):
     }
 
 
+def _fake_verification_node(state):
+    updated_threads = {}
+    for scheme_id, thread in state["scheme_threads"].items():
+        updated = dict(thread)
+        updated["phase"] = "docs_ready"
+        updated_threads[scheme_id] = updated
+    step = make_reasoning_step(
+        agent="verification",
+        action="verify_documents",
+        detail="[SMOKE-TEST] Deterministic clean verification to exercise phase wiring.",
+    )
+    return {
+        "current_phase": "verification",
+        "scheme_threads": updated_threads,
+        "reasoning_log": [step],
+    }
+
+
+def _fake_execution_node(state):
+    updated_threads = {}
+    for scheme_id, thread in state["scheme_threads"].items():
+        updated = dict(thread)
+        updated["phase"] = "filed"
+        updated["application_id"] = f"APP-{scheme_id}-STUB"
+        updated_threads[scheme_id] = updated
+    step = make_reasoning_step(
+        agent="execution",
+        action="submit_application",
+        detail="[SMOKE-TEST] Deterministic clean submission to exercise phase wiring.",
+    )
+    return {
+        "current_phase": "execution",
+        "scheme_threads": updated_threads,
+        "reasoning_log": [step],
+    }
+
+
 def test_graph_compiles():
     graph = build_graph()
     assert graph is not None
@@ -54,6 +94,8 @@ def test_graph_compiles():
 
 def test_all_six_nodes_write_reconciled_phase_literals(monkeypatch):
     monkeypatch.setattr("backend.graph.builder.discovery_node", _fake_discovery_node)
+    monkeypatch.setattr("backend.graph.builder.verification_node", _fake_verification_node)
+    monkeypatch.setattr("backend.graph.builder.execution_node", _fake_execution_node)
 
     graph = build_graph()
     config = _fresh_config()

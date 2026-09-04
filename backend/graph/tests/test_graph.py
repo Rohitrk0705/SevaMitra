@@ -45,13 +45,63 @@ def _fake_discovery_matched(state):
     }
 
 
+def _fake_verification_clean(state):
+    """Deterministic clean-verification stub, same rationale as
+    _fake_discovery_matched: Validator's own logic (real DigiLocker fetch +
+    Featherless conflict resolution) is covered by
+    tests/test_validator_agent.py — these tests only need to know the
+    graph wires verification_node's output through correctly.
+    """
+    updated_threads = {}
+    for scheme_id, thread in state["scheme_threads"].items():
+        updated = dict(thread)
+        updated["phase"] = "docs_ready"
+        updated_threads[scheme_id] = updated
+    step = make_reasoning_step(
+        agent="verification",
+        action="verify_documents",
+        detail="[TEST-STUB] Deterministic clean verification to exercise graph plumbing.",
+    )
+    return {
+        "current_phase": "verification",
+        "scheme_threads": updated_threads,
+        "reasoning_log": [step],
+    }
+
+
+def _fake_execution_clean(state):
+    """Deterministic clean-filing stub — see _fake_verification_clean."""
+    updated_threads = {}
+    for scheme_id, thread in state["scheme_threads"].items():
+        updated = dict(thread)
+        updated["phase"] = "filed"
+        updated["application_id"] = f"APP-{scheme_id}-STUB"
+        updated_threads[scheme_id] = updated
+    step = make_reasoning_step(
+        agent="execution",
+        action="submit_application",
+        detail="[TEST-STUB] Deterministic clean submission to exercise graph plumbing.",
+    )
+    return {
+        "current_phase": "execution",
+        "scheme_threads": updated_threads,
+        "reasoning_log": [step],
+    }
+
+
+def _patch_clean_pipeline(monkeypatch):
+    monkeypatch.setattr("backend.graph.builder.discovery_node", _fake_discovery_matched)
+    monkeypatch.setattr("backend.graph.builder.verification_node", _fake_verification_clean)
+    monkeypatch.setattr("backend.graph.builder.execution_node", _fake_execution_clean)
+
+
 def test_graph_compiles():
     graph = build_graph()
     assert graph is not None
 
 
 def test_full_happy_path(monkeypatch):
-    monkeypatch.setattr("backend.graph.builder.discovery_node", _fake_discovery_matched)
+    _patch_clean_pipeline(monkeypatch)
 
     graph = build_graph()
     config = _fresh_config()
@@ -67,7 +117,7 @@ def test_full_happy_path(monkeypatch):
 
 
 def test_checkpointer_persists(monkeypatch):
-    monkeypatch.setattr("backend.graph.builder.discovery_node", _fake_discovery_matched)
+    _patch_clean_pipeline(monkeypatch)
 
     graph = build_graph()
     config = _fresh_config()
@@ -89,7 +139,7 @@ def test_resume_from_checkpoint(monkeypatch):
     Rung 10: interrupt_before pauses the graph before a node runs, leaving
     a resumable checkpoint; invoke(None, config) continues from there.
     """
-    monkeypatch.setattr("backend.graph.builder.discovery_node", _fake_discovery_matched)
+    _patch_clean_pipeline(monkeypatch)
 
     graph = build_graph(interrupt_before=["escalate"])
     config = _fresh_config()
@@ -138,7 +188,7 @@ def test_empty_discovery_skips_to_end(monkeypatch):
 
 
 def test_reasoning_log_ordering(monkeypatch):
-    monkeypatch.setattr("backend.graph.builder.discovery_node", _fake_discovery_matched)
+    _patch_clean_pipeline(monkeypatch)
 
     graph = build_graph()
     config = _fresh_config()

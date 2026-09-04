@@ -4,6 +4,17 @@ backend/graph/builder.py
 Compiles the SevaMithra LangGraph orchestrator: 6 nodes, 2 conditional
 edges, checkpointed via SqliteSaver at backend/graph/checkpoints.sqlite
 (a separate file from the Rung 2 toy checkpoints.sqlite at the repo root).
+
+Rung 9 note on per-scheme parallelism: verification_node/execution_node
+(backend.agents.validator/filler) process every scheme_thread within one
+node invocation, same as before. True LangGraph Send-based per-scheme
+fan-out (a dynamic sub-invocation per scheme_id, with a reducer to merge
+results back into one scheme_threads dict) was assessed and not attempted
+here — it would mean redesigning this StateGraph's shape and retesting
+the checkpointer/interrupt_before behavior, well past a light touch.
+Validator and Filler instead run their per-scheme work concurrently via a
+bounded ThreadPoolExecutor *inside* each node, so DigiLocker/Featherless
+I/O genuinely overlaps without changing the graph shape.
 """
 
 import sqlite3

@@ -387,6 +387,10 @@ def run_discovery(state: SevaState) -> SevaState:
                 "confidence": final_confidence,
                 "blocked_on": blocked_on,
                 "charter_deadline_days": candidate.get("citizen_charter_days"),
+                # Rung 9: carried onto the SchemeThread so Validator doesn't
+                # need to re-query ChromaDB for scheme metadata.
+                "required_documents": candidate.get("required_documents") or [],
+                "fallback_documents": candidate.get("fallback_documents") or [],
             }
         )
 
@@ -404,6 +408,8 @@ def run_discovery(state: SevaState) -> SevaState:
                 confidence=entry["confidence"],
                 charter_deadline_days=entry["charter_deadline_days"],
                 blocked_on=entry["blocked_on"],
+                required_documents=entry["required_documents"],
+                fallback_documents=entry["fallback_documents"],
             )
             scheme_threads[entry["scheme_id"]] = thread
             if entry["scheme_id"] not in pursued_scheme_ids:

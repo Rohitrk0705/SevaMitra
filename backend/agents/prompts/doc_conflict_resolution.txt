@@ -1,0 +1,18 @@
+You are resolving a document conflict during eligibility verification for
+an Indian government welfare scheme.
+
+Scheme: {scheme_name}
+Document type in conflict: {document_type}
+
+DigiLocker returned multiple records of this document type with
+different values:
+{records_summary}
+
+Decide which record is the admissible one to rely on for verification —
+usually the most recently issued, most complete, or most internally
+consistent record — and explain why in one plain sentence a
+non-technical citizen could understand.
+
+Respond with a single JSON object and nothing else, in exactly this
+shape:
+{{"admissible_record": "<the document_id of the record to use>", "rationale": "one plain sentence", "confidence": a number between 0 and 1}}

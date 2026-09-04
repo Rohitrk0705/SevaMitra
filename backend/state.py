@@ -21,6 +21,9 @@ from operator import add
 class UserProfile(TypedDict):
     """Extracted from voice/text input by the Trigger node."""
     name: str
+    # Added in Rung 9: Validator/Filler both need this to call the mock
+    # DigiLocker/application endpoints, and no other field carries it.
+    aadhaar_number: Optional[str]
     age: Optional[int]
     gender: Optional[Literal["male", "female", "other"]]
     occupation: list[str]
@@ -77,6 +80,11 @@ class SchemeThread(TypedDict):
     phase: SchemePhase
     confidence: float
     blocked_on: list[str]
+    # Added in Rung 9: carried over from the NormalisedScheme record at
+    # Discovery time so Validator doesn't need to re-query ChromaDB.
+    required_documents: list[str]
+    # list of {"primary_doc": str, "acceptable_alternatives": list[str]}
+    fallback_documents: list[dict]
     documents: list[DocumentStatus]
     application_id: Optional[str]
     filed_at: Optional[str]
@@ -143,6 +151,7 @@ def create_initial_state(raw_input: str, session_id: Optional[str] = None) -> Se
     return SevaState(
         user_profile=UserProfile(
             name="",
+            aadhaar_number=None,
             age=None,
             gender=None,
             occupation=[],
@@ -193,6 +202,8 @@ def make_scheme_thread(
     confidence: float,
     charter_deadline_days: Optional[int] = None,
     blocked_on: Optional[list[str]] = None,
+    required_documents: Optional[list[str]] = None,
+    fallback_documents: Optional[list[dict]] = None,
 ) -> SchemeThread:
     """Build a fresh SchemeThread when Discovery decides to pursue a scheme."""
     return SchemeThread(
@@ -201,6 +212,8 @@ def make_scheme_thread(
         phase="discovered",
         confidence=confidence,
         blocked_on=blocked_on or [],
+        required_documents=required_documents or [],
+        fallback_documents=fallback_documents or [],
         documents=[],
         application_id=None,
         filed_at=None,

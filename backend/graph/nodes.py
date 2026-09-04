@@ -1,22 +1,24 @@
 """
 backend/graph/nodes.py
 
-Node functions for the SevaMithra LangGraph orchestrator. discovery_node is
-real logic as of Rung 8 (thin wrapper around backend.agents.discovery.
-run_discovery); verification_node, execution_node, monitor_node, and
-escalate_node remain no-op placeholders pending Rungs 9-10.
+Node functions for the SevaMithra LangGraph orchestrator. discovery_node
+(Rung 8), verification_node, and execution_node (both Rung 9) are real
+logic — thin adapters around backend.agents.discovery.run_discovery,
+backend.agents.validator.run_validator, and backend.agents.filler.
+run_filler respectively. monitor_node and escalate_node remain no-op
+placeholders pending Rung 10.
 
-SCHEMA DRIFT — RESOLVED in Rung 8: every phase string assigned by the stubs
-below now uses the exact SchemePhase / current_phase Literal values declared
-in backend/state.py ("matched" -> "discovered", "documents_verified" ->
-"docs_ready", "submitted" -> "filed", "rti_drafted" -> "escalated_rti",
-"monitor" -> "monitoring", "escalate" -> "escalation"). Each remapping is
-noted inline at its assignment.
+SCHEMA DRIFT — RESOLVED in Rung 8: every phase string assigned by the
+remaining stubs below uses the exact SchemePhase / current_phase Literal
+values declared in backend/state.py ("monitor" -> "monitoring", "escalate"
+-> "escalation"). Each remapping is noted inline at its assignment.
 """
 
 from datetime import datetime, timezone
 
 from backend.agents.discovery import run_discovery
+from backend.agents.filler import run_filler
+from backend.agents.validator import run_validator
 from backend.state import SevaState, make_reasoning_step
 
 
@@ -66,58 +68,31 @@ def discovery_node(state: SevaState) -> dict:
 
 
 def verification_node(state: SevaState) -> dict:
-    updated_threads = {}
-    for scheme_id, thread in state["scheme_threads"].items():
-        updated = dict(thread)
-        # Rung 8 drift fix: stub used "documents_verified", which has no
-        # SchemePhase Literal equivalent. Closest existing member is
-        # "docs_ready" (documents checked, ready to proceed).
-        updated["phase"] = "docs_ready"
-        updated_threads[scheme_id] = updated
+    """Thin LangGraph adapter around backend.agents.validator.run_validator.
+    See discovery_node's docstring for the diff-based reasoning_log pattern
+    this mirrors.
+    """
+    result_state = run_validator(state)
+    new_steps = result_state["reasoning_log"][len(state["reasoning_log"]):]
 
-    step = make_reasoning_step(
-        agent="verification",
-        action="verify_documents",
-        detail=(
-            "[STUB] Marked every scheme thread as documents_verified without "
-            "checking any actual document. Real Validator node will call the "
-            "mock DigiLocker endpoint (backend.mocks.api) for each required "
-            "document and branch on missing/expired/mismatched status."
-        ),
-    )
     return {
         "current_phase": "verification",
-        "scheme_threads": updated_threads,
-        "reasoning_log": [step],
-        "updated_at": _now_iso(),
+        "scheme_threads": result_state["scheme_threads"],
+        "reasoning_log": new_steps,
+        "updated_at": result_state["updated_at"],
     }
 
 
 def execution_node(state: SevaState) -> dict:
-    updated_threads = {}
-    for scheme_id, thread in state["scheme_threads"].items():
-        updated = dict(thread)
-        # Rung 8 drift fix: stub used "submitted", which has no SchemePhase
-        # Literal equivalent. Closest existing member is "filed".
-        updated["phase"] = "filed"
-        updated["application_id"] = f"APP-{scheme_id}-STUB"
-        updated_threads[scheme_id] = updated
+    """Thin LangGraph adapter around backend.agents.filler.run_filler."""
+    result_state = run_filler(state)
+    new_steps = result_state["reasoning_log"][len(state["reasoning_log"]):]
 
-    step = make_reasoning_step(
-        agent="execution",
-        action="submit_application",
-        detail=(
-            "[STUB] Assigned a fake application_id to every scheme thread "
-            "without submitting anything. Real Filler node will assemble the "
-            "application payload from the verified documents and POST it to "
-            "the mock applications/submit endpoint (backend.mocks.api)."
-        ),
-    )
     return {
         "current_phase": "execution",
-        "scheme_threads": updated_threads,
-        "reasoning_log": [step],
-        "updated_at": _now_iso(),
+        "scheme_threads": result_state["scheme_threads"],
+        "reasoning_log": new_steps,
+        "updated_at": result_state["updated_at"],
     }
 
 
