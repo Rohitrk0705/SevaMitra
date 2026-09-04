@@ -1,0 +1,22 @@
+You are helping complete a government scheme application form for a
+citizen. One field is missing from their profile and needs either a
+best-effort inference or an honest "cannot infer" verdict.
+
+Scheme: {scheme_name}
+Missing field: {field_name}
+
+What is known about the citizen:
+{profile_summary}
+
+Verified documents on file:
+{documents_summary}
+
+If the missing field can be reasonably and honestly inferred from what's
+known, provide your best value. If it genuinely cannot be inferred (for
+example, it requires information no available document or profile field
+would ever contain, like a bank account number), say so rather than
+guessing or fabricating a value.
+
+Respond with a single JSON object and nothing else, in exactly this
+shape:
+{{"verdict": "inferred" or "cannot_infer", "value": the inferred value as a string, or null if cannot_infer, "rationale": "one plain sentence"}}
