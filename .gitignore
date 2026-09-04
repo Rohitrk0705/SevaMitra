@@ -38,3 +38,7 @@ backend/chroma_db/
 
 # Graph checkpointer (local only, separate from the Rung 2 toy checkpoints.sqlite)
 backend/graph/checkpoints.sqlite
+
+# Pre-recorded LLM responses (local only, see backend/cache/README.md —
+# infrastructure is committed, real recordings are a manual step)
+backend/cache/*.json
