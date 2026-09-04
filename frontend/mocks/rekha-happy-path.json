@@ -1,0 +1,353 @@
+[
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:00.000Z",
+    "phase": "trigger",
+    "agent": "orchestrator",
+    "message": "Initialized autonomous session for Rekha Murugan. Voice intent ingested: 'I just finished 12th standard and got admission in government engineering college. My father is a small farmer. Are there any schemes for my fees and allowance?'"
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:00.500Z",
+    "phase": "trigger",
+    "agent": "orchestrator",
+    "message": "Extracted profile parameters: { age: 18, gender: 'female', state: 'Tamil Nadu', occupation: ['student', 'farmer_daughter'], category: 'OBC', annual_income_inr: 84000 }."
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:01.000Z",
+    "phase": "discovery",
+    "agent": "search",
+    "message": "Querying state and central scheme vector indices with criteria: female student, higher education, Tamil Nadu, farmer dependent."
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:01.800Z",
+    "phase": "discovery",
+    "agent": "search",
+    "message": "Discovered 3 prospective welfare schemes. Evaluating eligibility constraints against citizen profile.",
+    "scheme_id": "TN-SCH-01"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:02.000Z",
+    "scheme_id": "TN-SCH-01",
+    "scheme_name": "Moovalur Ramamirtham Ammaiyar Higher Education Assurance Scheme (Pudhumai Penn)",
+    "phase": "matched",
+    "confidence": 0.96
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:02.200Z",
+    "scheme_id": "BCMBC-POSTMATRIC-02",
+    "scheme_name": "Post-Matric Scholarship Scheme for BC/MBC/DNC Students",
+    "phase": "matched",
+    "confidence": 0.91
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:02.400Z",
+    "scheme_id": "TN-UZHAVAR-03",
+    "scheme_name": "Tamil Nadu Chief Minister's Uzhavar Pathukappu Thittam (Educational Assistance)",
+    "phase": "matched",
+    "confidence": 0.94
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:03.000Z",
+    "phase": "verification",
+    "agent": "validator",
+    "message": "Initiating secure DigiLocker pull for Aadhaar 234567890123. Checking authentic documents for all 3 schemes."
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:03.500Z",
+    "scheme_id": "TN-SCH-01",
+    "scheme_name": "Moovalur Ramamirtham Ammaiyar Higher Education Assurance Scheme (Pudhumai Penn)",
+    "phase": "eligibility_checked",
+    "confidence": 0.96
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:03.800Z",
+    "scheme_id": "BCMBC-POSTMATRIC-02",
+    "scheme_name": "Post-Matric Scholarship Scheme for BC/MBC/DNC Students",
+    "phase": "eligibility_checked",
+    "confidence": 0.91
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:04.000Z",
+    "scheme_id": "TN-UZHAVAR-03",
+    "scheme_name": "Tamil Nadu Chief Minister's Uzhavar Pathukappu Thittam (Educational Assistance)",
+    "phase": "eligibility_checked",
+    "confidence": 0.94
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:04.500Z",
+    "phase": "verification",
+    "agent": "validator",
+    "message": "Verifying required credentials: Class 10/12 Government School Proof, Caste Certificate, Bank Passbook, and Income Certificate.",
+    "scheme_id": "BCMBC-POSTMATRIC-02"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:05.000Z",
+    "scheme_id": "TN-SCH-01",
+    "scheme_name": "Moovalur Ramamirtham Ammaiyar Higher Education Assurance Scheme (Pudhumai Penn)",
+    "phase": "documents_requested",
+    "confidence": 0.96
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:05.300Z",
+    "scheme_id": "BCMBC-POSTMATRIC-02",
+    "scheme_name": "Post-Matric Scholarship Scheme for BC/MBC/DNC Students",
+    "phase": "documents_requested",
+    "confidence": 0.91
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:05.600Z",
+    "scheme_id": "TN-UZHAVAR-03",
+    "scheme_name": "Tamil Nadu Chief Minister's Uzhavar Pathukappu Thittam (Educational Assistance)",
+    "phase": "documents_requested",
+    "confidence": 0.94
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:06.200Z",
+    "phase": "verification",
+    "agent": "validator",
+    "message": "DigiLocker record inspection: Income Certificate TN-INC-2022-478291 expired on 2023-04-14. Annual renewal mandatory for Post-Matric.",
+    "scheme_id": "BCMBC-POSTMATRIC-02"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:06.800Z",
+    "scheme_id": "BCMBC-POSTMATRIC-02",
+    "scheme_name": "Post-Matric Scholarship Scheme for BC/MBC/DNC Students",
+    "phase": "documents_missing",
+    "confidence": 0.35
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:07.400Z",
+    "phase": "verification",
+    "agent": "validator",
+    "message": "BCMBC-POSTMATRIC-02 blocked due to expired income credential. Pursuing active viable schemes: TN-SCH-01 and TN-UZHAVAR-03.",
+    "scheme_id": "BCMBC-POSTMATRIC-02"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:08.000Z",
+    "scheme_id": "TN-SCH-01",
+    "scheme_name": "Moovalur Ramamirtham Ammaiyar Higher Education Assurance Scheme (Pudhumai Penn)",
+    "phase": "documents_verified",
+    "confidence": 0.98
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:08.400Z",
+    "scheme_id": "TN-UZHAVAR-03",
+    "scheme_name": "Tamil Nadu Chief Minister's Uzhavar Pathukappu Thittam (Educational Assistance)",
+    "phase": "documents_verified",
+    "confidence": 0.96
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:09.000Z",
+    "phase": "execution",
+    "agent": "filler",
+    "message": "Fetching official application schemas from e-Sevai portal & Social Welfare Dept API for Pudhumai Penn and Uzhavar Thittam.",
+    "scheme_id": "TN-SCH-01"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:09.500Z",
+    "scheme_id": "TN-SCH-01",
+    "scheme_name": "Moovalur Ramamirtham Ammaiyar Higher Education Assurance Scheme (Pudhumai Penn)",
+    "phase": "form_fetched",
+    "confidence": 0.98
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:09.800Z",
+    "scheme_id": "TN-UZHAVAR-03",
+    "scheme_name": "Tamil Nadu Chief Minister's Uzhavar Pathukappu Thittam (Educational Assistance)",
+    "phase": "form_fetched",
+    "confidence": 0.96
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:10.500Z",
+    "phase": "execution",
+    "agent": "filler",
+    "message": "Auto-populating citizen identifiers, EMIS student ID, college admission code, and IFSC bank details into form fields.",
+    "scheme_id": "TN-SCH-01"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:11.200Z",
+    "scheme_id": "TN-SCH-01",
+    "scheme_name": "Moovalur Ramamirtham Ammaiyar Higher Education Assurance Scheme (Pudhumai Penn)",
+    "phase": "form_filled",
+    "confidence": 0.98
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:11.500Z",
+    "scheme_id": "TN-UZHAVAR-03",
+    "scheme_name": "Tamil Nadu Chief Minister's Uzhavar Pathukappu Thittam (Educational Assistance)",
+    "phase": "form_filled",
+    "confidence": 0.96
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:12.200Z",
+    "phase": "execution",
+    "agent": "filler",
+    "message": "Submitting payload to State Social Welfare gateway. Signed with Aadhaar OTP authentication token.",
+    "scheme_id": "TN-SCH-01"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:13.000Z",
+    "scheme_id": "TN-SCH-01",
+    "scheme_name": "Moovalur Ramamirtham Ammaiyar Higher Education Assurance Scheme (Pudhumai Penn)",
+    "phase": "submitted",
+    "confidence": 0.99,
+    "application_id": "TN-PUDHUMAI-2026-98124"
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:13.800Z",
+    "phase": "execution",
+    "agent": "filler",
+    "message": "Submitting Uzhavar Pathukappu Thittam scholarship application to Revenue Department e-District portal.",
+    "scheme_id": "TN-UZHAVAR-03"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:14.500Z",
+    "scheme_id": "TN-UZHAVAR-03",
+    "scheme_name": "Tamil Nadu Chief Minister's Uzhavar Pathukappu Thittam (Educational Assistance)",
+    "phase": "submitted",
+    "confidence": 0.98,
+    "application_id": "TN-UZHAVAR-APP-88412"
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:15.200Z",
+    "phase": "monitor",
+    "agent": "monitor",
+    "message": "Both applications filed successfully. Registering SLA compliance monitors with Citizen Charter deadlines (30 days)."
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:15.800Z",
+    "scheme_id": "TN-SCH-01",
+    "scheme_name": "Moovalur Ramamirtham Ammaiyar Higher Education Assurance Scheme (Pudhumai Penn)",
+    "phase": "monitoring",
+    "confidence": 0.99,
+    "application_id": "TN-PUDHUMAI-2026-98124"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:16.200Z",
+    "scheme_id": "TN-UZHAVAR-03",
+    "scheme_name": "Tamil Nadu Chief Minister's Uzhavar Pathukappu Thittam (Educational Assistance)",
+    "phase": "monitoring",
+    "confidence": 0.98,
+    "application_id": "TN-UZHAVAR-APP-88412"
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:17.000Z",
+    "phase": "monitor",
+    "agent": "monitor",
+    "message": "Initiating time-dilation watch. Monitoring official endpoints for status transitions across statutory processing window."
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:01:17.000Z",
+    "phase": "escalate",
+    "agent": "monitor",
+    "message": "Status query results: TN-PUDHUMAI-2026-98124 approved and ₹1,000 monthly disbursement scheduled. TN-UZHAVAR-APP-88412 is UNRESPONSIVE (status: PENDING after 240 days / 8 months).",
+    "scheme_id": "TN-UZHAVAR-03"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:01:17.500Z",
+    "scheme_id": "TN-SCH-01",
+    "scheme_name": "Moovalur Ramamirtham Ammaiyar Higher Education Assurance Scheme (Pudhumai Penn)",
+    "phase": "completed",
+    "confidence": 1.0,
+    "application_id": "TN-PUDHUMAI-2026-98124"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:01:18.000Z",
+    "scheme_id": "TN-UZHAVAR-03",
+    "scheme_name": "Tamil Nadu Chief Minister's Uzhavar Pathukappu Thittam (Educational Assistance)",
+    "phase": "deadline_crossed",
+    "confidence": 0.98,
+    "application_id": "TN-UZHAVAR-APP-88412"
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:01:18.800Z",
+    "phase": "escalate",
+    "agent": "escalation",
+    "message": "Citizen's Charter SLA for TN-UZHAVAR-03 is 30 calendar days. 240 days elapsed without communication. Initiating statutory administrative escalation.",
+    "scheme_id": "TN-UZHAVAR-03"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:01:19.500Z",
+    "scheme_id": "TN-UZHAVAR-03",
+    "scheme_name": "Tamil Nadu Chief Minister's Uzhavar Pathukappu Thittam (Educational Assistance)",
+    "phase": "escalation_drafted",
+    "confidence": 0.98,
+    "application_id": "TN-UZHAVAR-APP-88412"
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:01:20.200Z",
+    "phase": "escalate",
+    "agent": "escalation",
+    "message": "Synthesizing formal Right to Information (RTI) application citing Tamil Nadu Right to Information Rules and Section 6(1) of RTI Act 2005.",
+    "scheme_id": "TN-UZHAVAR-03"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:01:21.000Z",
+    "scheme_id": "TN-UZHAVAR-03",
+    "scheme_name": "Tamil Nadu Chief Minister's Uzhavar Pathukappu Thittam (Educational Assistance)",
+    "phase": "rti_drafted",
+    "confidence": 0.98,
+    "application_id": "TN-UZHAVAR-APP-88412",
+    "rti_markdown": "# APPLICATION FOR INFORMATION UNDER SECTION 6(1) OF THE RIGHT TO INFORMATION ACT, 2005\n\n**To:**\nPublic Information Officer (PIO)  \nOffice of the Special Tahsildar (Social Security Schemes / Uzhavar Pathukappu Thittam)  \nTaluk Office, Coimbatore North, Tamil Nadu - 641018\n\n---\n\n### 1. Applicant Particulars\n- **Name:** Rekha Murugan\n- **Guardian:** Murugan Ramasamy\n- **Address:** 14/2 South Street, Pollachi Road, Coimbatore, Tamil Nadu\n- **Contact:** Citizen Delegate Token #SM-2026-8812\n\n### 2. Subject Matter of Information\nInordinate delay and lack of statutory disposal regarding application for **Educational Assistance under CM's Uzhavar Pathukappu Thittam** (Application ID: **TN-UZHAVAR-APP-88412** filed on 02-Jan-2026).\n\n### 3. Specific Information Requested under Section 6(1)\n1. **Daily Progress Record:** Please provide certified copies of the daily movement / progress sheet of Application No. `TN-UZHAVAR-APP-88412` from the date of receipt to date.\n2. **Responsible Officials:** Please provide the names, designations, and contact numbers of the dealing clerks and sanctioning officers who had custody of this file beyond the prescribed 30-day Citizen's Charter SLA.\n3. **Reason for Non-Compliance:** If the application was withheld or delayed, please furnish the specific reasons recorded in writing along with certified file notings.\n4. **Action on Delay:** What disciplinary action or penalty has been initiated against the defaulting officers under the Tamil Nadu Government Servants Conduct Rules for failing to adhere to the statutory timeline?\n\n### 4. Statutory Citations & Legal Grounding\n- **RTI Act 2005 - Section 6(1):** Right to seek information in writing.\n- **RTI Act 2005 - Section 7(1):** Mandatory disposal within 30 days.\n- **TN-CITIZEN-CHARTER-REV-2021:** Maximum turnaround time of 30 days for farmer educational welfare grants.\n\n### 5. Application Fee\n- Fee of ₹10/- affixed via e-Challan / Court Fee Stamp No. `TN-REV-RTI-2026-9912`.\n\n*Drafted autonomously by SevaMithra Civic Escalation Agent on behalf of citizen Rekha Murugan.*"
+  },
+  {
+    "type": "rti_draft_ready",
+    "timestamp": "2026-09-02T02:01:21.500Z",
+    "scheme_id": "TN-UZHAVAR-03",
+    "markdown": "# APPLICATION FOR INFORMATION UNDER SECTION 6(1) OF THE RIGHT TO INFORMATION ACT, 2005\n\n**To:**\nPublic Information Officer (PIO)  \nOffice of the Special Tahsildar (Social Security Schemes / Uzhavar Pathukappu Thittam)  \nTaluk Office, Coimbatore North, Tamil Nadu - 641018\n\n---\n\n### 1. Applicant Particulars\n- **Name:** Rekha Murugan\n- **Guardian:** Murugan Ramasamy\n- **Address:** 14/2 South Street, Pollachi Road, Coimbatore, Tamil Nadu\n- **Contact:** Citizen Delegate Token #SM-2026-8812\n\n### 2. Subject Matter of Information\nInordinate delay and lack of statutory disposal regarding application for **Educational Assistance under CM's Uzhavar Pathukappu Thittam** (Application ID: **TN-UZHAVAR-APP-88412** filed on 02-Jan-2026).\n\n### 3. Specific Information Requested under Section 6(1)\n1. **Daily Progress Record:** Please provide certified copies of the daily movement / progress sheet of Application No. `TN-UZHAVAR-APP-88412` from the date of receipt to date.\n2. **Responsible Officials:** Please provide the names, designations, and contact numbers of the dealing clerks and sanctioning officers who had custody of this file beyond the prescribed 30-day Citizen's Charter SLA.\n3. **Reason for Non-Compliance:** If the application was withheld or delayed, please furnish the specific reasons recorded in writing along with certified file notings.\n4. **Action on Delay:** What disciplinary action or penalty has been initiated against the defaulting officers under the Tamil Nadu Government Servants Conduct Rules for failing to adhere to the statutory timeline?\n\n### 4. Statutory Citations & Legal Grounding\n- **RTI Act 2005 - Section 6(1):** Right to seek information in writing.\n- **RTI Act 2005 - Section 7(1):** Mandatory disposal within 30 days.\n- **TN-CITIZEN-CHARTER-REV-2021:** Maximum turnaround time of 30 days for farmer educational welfare grants.\n\n### 5. Application Fee\n- Fee of ₹10/- affixed via e-Challan / Court Fee Stamp No. `TN-REV-RTI-2026-9912`.\n\n*Drafted autonomously by SevaMithra Civic Escalation Agent on behalf of citizen Rekha Murugan.*",
+    "cited_clauses": [
+      "RTI-2005-S6-1",
+      "RTI-2005-S7-1",
+      "TN-CITIZEN-CHARTER-REV-2021",
+      "TN-REV-UZHAVAR-SLA"
+    ]
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:01:22.000Z",
+    "phase": "escalate",
+    "agent": "orchestrator",
+    "message": "Autonomous cycle finalized: Pudhumai Penn enrolled successfully; Uzhavar Thittam statutory RTI escalation package prepared for citizen dispatch.",
+    "scheme_id": "TN-UZHAVAR-03"
+  }
+]

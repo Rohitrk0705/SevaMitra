@@ -1,0 +1,40 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Environment
+.env
+*.db
+*.sqlite
+*.sqlite3
+
+# Node
+node_modules/
+.next/
+out/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Data (keep structure, ignore large files)
+backend/data/*.json
+backend/data/*.csv
+!backend/data/.gitkeep
+
+# Checkpointer proof (local only)
+checkpoints.sqlite
+
+# ChromaDB persisted collection (local only, rebuilt via ingest.py)
+backend/chroma_db/
+
+# Graph checkpointer (local only, separate from the Rung 2 toy checkpoints.sqlite)
+backend/graph/checkpoints.sqlite

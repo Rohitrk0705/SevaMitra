@@ -1,0 +1,352 @@
+[
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:00.000Z",
+    "phase": "trigger",
+    "agent": "orchestrator",
+    "message": "Initialized autonomous session for Rajesh Kumar. Voice intent ingested: 'I am cultivating 2 acres of paddy in Thanjavur district. Need help claiming farmer assistance and input subsidies.'"
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:00.500Z",
+    "phase": "trigger",
+    "agent": "orchestrator",
+    "message": "Extracted profile: { age: 45, gender: 'male', state: 'Tamil Nadu', occupation: ['farmer'], landholding_hectares: 0.8, annual_income_inr: 145000, district: 'Thanjavur' }."
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:01.000Z",
+    "phase": "discovery",
+    "agent": "search",
+    "message": "Searching agricultural, small & marginal farmer schemes for Cauvery Delta region."
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:01.800Z",
+    "phase": "discovery",
+    "agent": "search",
+    "message": "Identified 3 matching welfare & subsidy schemes.",
+    "scheme_id": "PM-KISAN-01"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:02.000Z",
+    "scheme_id": "PM-KISAN-01",
+    "scheme_name": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+    "phase": "matched",
+    "confidence": 0.98
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:02.200Z",
+    "scheme_id": "PM-KUSUM-02",
+    "scheme_name": "PM-KUSUM Component-B Solar Agricultural Pump Subsidy",
+    "phase": "matched",
+    "confidence": 0.76
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:02.400Z",
+    "scheme_id": "TN-KURUVAI-03",
+    "scheme_name": "Tamil Nadu Kuruvai Cultivation Special Input Package",
+    "phase": "matched",
+    "confidence": 0.95
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:03.000Z",
+    "phase": "verification",
+    "agent": "validator",
+    "message": "Authenticating Aadhaar 345678901234 via DigiLocker. Fetching land patta/chitta, bank passbook, and income certificate."
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:03.500Z",
+    "scheme_id": "PM-KISAN-01",
+    "scheme_name": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+    "phase": "eligibility_checked",
+    "confidence": 0.98
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:03.800Z",
+    "scheme_id": "PM-KUSUM-02",
+    "scheme_name": "PM-KUSUM Component-B Solar Agricultural Pump Subsidy",
+    "phase": "eligibility_checked",
+    "confidence": 0.76
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:04.000Z",
+    "scheme_id": "TN-KURUVAI-03",
+    "scheme_name": "Tamil Nadu Kuruvai Cultivation Special Input Package",
+    "phase": "eligibility_checked",
+    "confidence": 0.95
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:04.600Z",
+    "phase": "verification",
+    "agent": "validator",
+    "message": "Checking e-Patta TN-LAND-THJ-2019-7788 (0.8 Ha) and IOB Savings Bank account."
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:05.000Z",
+    "scheme_id": "PM-KISAN-01",
+    "scheme_name": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+    "phase": "documents_requested",
+    "confidence": 0.98
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:05.300Z",
+    "scheme_id": "PM-KUSUM-02",
+    "scheme_name": "PM-KUSUM Component-B Solar Agricultural Pump Subsidy",
+    "phase": "documents_requested",
+    "confidence": 0.76
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:05.600Z",
+    "scheme_id": "TN-KURUVAI-03",
+    "scheme_name": "Tamil Nadu Kuruvai Cultivation Special Input Package",
+    "phase": "documents_requested",
+    "confidence": 0.95
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:06.200Z",
+    "phase": "verification",
+    "agent": "validator",
+    "message": "PM-KUSUM Component-B requires TANGEDCO No-Objection Certificate for grid non-feasibility. Document unavailable.",
+    "scheme_id": "PM-KUSUM-02"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:06.800Z",
+    "scheme_id": "PM-KUSUM-02",
+    "scheme_name": "PM-KUSUM Component-B Solar Agricultural Pump Subsidy",
+    "phase": "documents_missing",
+    "confidence": 0.25
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:07.400Z",
+    "phase": "verification",
+    "agent": "validator",
+    "message": "Land title & bank linkages verified with 100% fidelity. Proceeding with PM-KISAN and Kuruvai Package.",
+    "scheme_id": "PM-KISAN-01"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:08.000Z",
+    "scheme_id": "PM-KISAN-01",
+    "scheme_name": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+    "phase": "documents_verified",
+    "confidence": 0.99
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:08.400Z",
+    "scheme_id": "TN-KURUVAI-03",
+    "scheme_name": "Tamil Nadu Kuruvai Cultivation Special Input Package",
+    "phase": "documents_verified",
+    "confidence": 0.97
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:09.000Z",
+    "phase": "execution",
+    "agent": "filler",
+    "message": "Connecting to PM-KISAN National Portal & TN Agrisnet automated API gateways.",
+    "scheme_id": "PM-KISAN-01"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:09.500Z",
+    "scheme_id": "PM-KISAN-01",
+    "scheme_name": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+    "phase": "form_fetched",
+    "confidence": 0.99
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:09.800Z",
+    "scheme_id": "TN-KURUVAI-03",
+    "scheme_name": "Tamil Nadu Kuruvai Cultivation Special Input Package",
+    "phase": "form_fetched",
+    "confidence": 0.97
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:10.500Z",
+    "phase": "execution",
+    "agent": "filler",
+    "message": "Form population: Patta Survey No 142/3B, Thanjavur revenue village code 63012, IFSC IOBA0001100.",
+    "scheme_id": "PM-KISAN-01"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:11.200Z",
+    "scheme_id": "PM-KISAN-01",
+    "scheme_name": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+    "phase": "form_filled",
+    "confidence": 0.99
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:11.500Z",
+    "scheme_id": "TN-KURUVAI-03",
+    "scheme_name": "Tamil Nadu Kuruvai Cultivation Special Input Package",
+    "phase": "form_filled",
+    "confidence": 0.97
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:12.200Z",
+    "phase": "execution",
+    "agent": "filler",
+    "message": "Transmitting application packets to PM-KISAN Central Registry with e-Sign verification.",
+    "scheme_id": "PM-KISAN-01"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:13.000Z",
+    "scheme_id": "PM-KISAN-01",
+    "scheme_name": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+    "phase": "submitted",
+    "confidence": 1.0,
+    "application_id": "PMKISAN-TN-2026-44119"
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:13.800Z",
+    "phase": "execution",
+    "agent": "filler",
+    "message": "Transmitting Kuruvai package claim to Thanjavur District Joint Director of Agriculture.",
+    "scheme_id": "TN-KURUVAI-03"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:14.500Z",
+    "scheme_id": "TN-KURUVAI-03",
+    "scheme_name": "Tamil Nadu Kuruvai Cultivation Special Input Package",
+    "phase": "submitted",
+    "confidence": 0.98,
+    "application_id": "TN-AGRI-2026-10294"
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:15.200Z",
+    "phase": "monitor",
+    "agent": "monitor",
+    "message": "Applications confirmed. Establishing continuous SLA status heartbeat for Rajesh Kumar."
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:15.800Z",
+    "scheme_id": "PM-KISAN-01",
+    "scheme_name": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+    "phase": "monitoring",
+    "confidence": 1.0,
+    "application_id": "PMKISAN-TN-2026-44119"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:00:16.200Z",
+    "scheme_id": "TN-KURUVAI-03",
+    "scheme_name": "Tamil Nadu Kuruvai Cultivation Special Input Package",
+    "phase": "monitoring",
+    "confidence": 0.98,
+    "application_id": "TN-AGRI-2026-10294"
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:00:17.000Z",
+    "phase": "monitor",
+    "agent": "monitor",
+    "message": "Initiating time-dilation watch across statutory 30-day processing window."
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:01:17.000Z",
+    "phase": "escalate",
+    "agent": "monitor",
+    "message": "Audit update: PM-KISAN approved. Kuruvai Cultivation Package (TN-AGRI-2026-10294) has zero file movement after 240 days.",
+    "scheme_id": "TN-KURUVAI-03"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:01:17.500Z",
+    "scheme_id": "PM-KISAN-01",
+    "scheme_name": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+    "phase": "completed",
+    "confidence": 1.0,
+    "application_id": "PMKISAN-TN-2026-44119"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:01:18.000Z",
+    "scheme_id": "TN-KURUVAI-03",
+    "scheme_name": "Tamil Nadu Kuruvai Cultivation Special Input Package",
+    "phase": "deadline_crossed",
+    "confidence": 0.98,
+    "application_id": "TN-AGRI-2026-10294"
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:01:18.800Z",
+    "phase": "escalate",
+    "agent": "escalation",
+    "message": "Kuruvai package statutory timeline violated. Preparing administrative demand and legal RTI under Section 6(1).",
+    "scheme_id": "TN-KURUVAI-03"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:01:19.500Z",
+    "scheme_id": "TN-KURUVAI-03",
+    "scheme_name": "Tamil Nadu Kuruvai Cultivation Special Input Package",
+    "phase": "escalation_drafted",
+    "confidence": 0.98,
+    "application_id": "TN-AGRI-2026-10294"
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:01:20.200Z",
+    "phase": "escalate",
+    "agent": "escalation",
+    "message": "Generating RTI petition targeting Agriculture Department Thanjavur PIO.",
+    "scheme_id": "TN-KURUVAI-03"
+  },
+  {
+    "type": "scheme_thread_update",
+    "timestamp": "2026-09-02T02:01:21.000Z",
+    "scheme_id": "TN-KURUVAI-03",
+    "scheme_name": "Tamil Nadu Kuruvai Cultivation Special Input Package",
+    "phase": "rti_drafted",
+    "confidence": 0.98,
+    "application_id": "TN-AGRI-2026-10294",
+    "rti_markdown": "# APPLICATION FOR INFORMATION UNDER SECTION 6(1) OF RTI ACT 2005\n\n**To:**\nPublic Information Officer / Joint Director of Agriculture  \nDepartment of Agriculture and Farmers Welfare  \nThanjavur District Collectorate Complex, Tamil Nadu - 613010\n\n---\n\n### 1. Applicant Particulars\n- **Name:** Rajesh Kumar\n- **Farmer Category:** Small & Marginal Farmer (0.8 Ha)\n- **Survey No:** 142/3B, Thanjavur District\n- **Token:** #SM-FARM-2026-4411\n\n### 2. Subject Matter\nComplete non-disposal and unexplained delay regarding Kuruvai Cultivation Special Package Subsidy application **TN-AGRI-2026-10294** filed on 02-Jan-2026.\n\n### 3. Questions / Information Sought\n1. **File Status:** Exact reasons why agricultural subsidy and seed kit sanction under Application `TN-AGRI-2026-10294` was not disbursed within the Kuruvai planting window.\n2. **Log of Handling:** Certified copy of file movement and inspection notes recorded by the Assistant Agriculture Officer (AAO) and Agricultural Officer (AO).\n3. **Fund Allocation:** Total subsidy funds received and disbursed for Thanjavur taluk under the 2026 Kuruvai Package.\n4. **Officer Accountability:** Name and designation of the designated grievance officer responsible for delayed disbursement compensation.\n\n### 4. Statutory Citations\n- **RTI Act 2005 - Section 6(1)**\n- **RTI Act 2005 - Section 7(1)**\n- **TN Agriculture Citizen Charter 2022 (SLA: 21 Days)**\n\n*Drafted autonomously by SevaMithra Civic Escalation Agent on behalf of citizen Rajesh Kumar.*"
+  },
+  {
+    "type": "rti_draft_ready",
+    "timestamp": "2026-09-02T02:01:21.500Z",
+    "scheme_id": "TN-KURUVAI-03",
+    "markdown": "# APPLICATION FOR INFORMATION UNDER SECTION 6(1) OF RTI ACT 2005\n\n**To:**\nPublic Information Officer / Joint Director of Agriculture  \nDepartment of Agriculture and Farmers Welfare  \nThanjavur District Collectorate Complex, Tamil Nadu - 613010\n\n---\n\n### 1. Applicant Particulars\n- **Name:** Rajesh Kumar\n- **Farmer Category:** Small & Marginal Farmer (0.8 Ha)\n- **Survey No:** 142/3B, Thanjavur District\n- **Token:** #SM-FARM-2026-4411\n\n### 2. Subject Matter\nComplete non-disposal and unexplained delay regarding Kuruvai Cultivation Special Package Subsidy application **TN-AGRI-2026-10294** filed on 02-Jan-2026.\n\n### 3. Questions / Information Sought\n1. **File Status:** Exact reasons why agricultural subsidy and seed kit sanction under Application `TN-AGRI-2026-10294` was not disbursed within the Kuruvai planting window.\n2. **Log of Handling:** Certified copy of file movement and inspection notes recorded by the Assistant Agriculture Officer (AAO) and Agricultural Officer (AO).\n3. **Fund Allocation:** Total subsidy funds received and disbursed for Thanjavur taluk under the 2026 Kuruvai Package.\n4. **Officer Accountability:** Name and designation of the designated grievance officer responsible for delayed disbursement compensation.\n\n### 4. Statutory Citations\n- **RTI Act 2005 - Section 6(1)**\n- **RTI Act 2005 - Section 7(1)**\n- **TN-AGRI-CHARTER-SLA-2022**\n- **TN-REV-DELTA-COMPENSATION**\n\n*Drafted autonomously by SevaMithra Civic Escalation Agent on behalf of citizen Rajesh Kumar.*",
+    "cited_clauses": [
+      "RTI-2005-S6-1",
+      "RTI-2005-S7-1",
+      "TN-AGRI-CHARTER-SLA-2022",
+      "TN-REV-DELTA-COMPENSATION"
+    ]
+  },
+  {
+    "type": "reasoning_step",
+    "timestamp": "2026-09-02T02:01:22.000Z",
+    "phase": "escalate",
+    "agent": "orchestrator",
+    "message": "Farmer cycle completed. PM-KISAN active; statutory RTI application generated for Kuruvai package.",
+    "scheme_id": "TN-KURUVAI-03"
+  }
+]

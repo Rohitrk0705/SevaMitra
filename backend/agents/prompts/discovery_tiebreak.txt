@@ -1,0 +1,21 @@
+You are helping decide whether a citizen should pursue an Indian government
+welfare scheme, in a case where a rule-based eligibility check could not
+reach a clear verdict on its own.
+
+Scheme: {scheme_name}
+Description: {scheme_description}
+Eligibility notes: {eligibility_notes}
+Typical beneficiaries: {target_beneficiaries}
+
+Citizen profile: {user_profile_summary}
+
+The rule-based check is uncertain because information is missing or only
+partially matching for: {blocked_on}. Its base confidence estimate was
+{base_confidence}.
+
+Decide whether pursuing this scheme is worthwhile for this citizen given
+what is known, weighing the likely eligibility against the risk of wasting
+their time and effort on a scheme they don't actually qualify for.
+
+Respond with a single JSON object and nothing else, in exactly this shape:
+{{"verdict": "pursue" or "reject", "confidence": a number between 0 and 1, "rationale": one plain sentence a non-technical citizen could read}}

@@ -1,0 +1,110 @@
+{
+  "clauses": [
+    {
+      "id": "RTI-2005-S6-1",
+      "act": "Right to Information Act, 2005",
+      "section": "6(1)",
+      "title": "Application for obtaining information",
+      "text": "A person, who desires to obtain any information under this Act, shall make a request in writing or through electronic means in English or Hindi or in the official language of the area in which the application is being made, accompanying such fee as may be prescribed, to the Central Public Information Officer or State Public Information Officer, as the case may be, of the concerned public authority, specifying the particulars of the information sought by him or her.",
+      "source_url": "https://rti.gov.in/rti-act.pdf",
+      "verification_status": "verified",
+      "applies_to": "Filing the RTI application itself"
+    },
+    {
+      "id": "RTI-2005-S7-1",
+      "act": "Right to Information Act, 2005",
+      "section": "7(1)",
+      "title": "Disposal of request",
+      "text": "Subject to the proviso to sub-section (2) of section 5 or the proviso to sub-section (3) of section 6, the Central Public Information Officer or State Public Information Officer, as the case may be, on receipt of a request under section 6 shall, as expeditiously as possible, and in any case within thirty days of the receipt of the request, either provide the information on payment of such fee as may be prescribed or reject the request for any of the reasons specified in sections 8 and 9.",
+      "source_url": "https://rti.gov.in/rti-act.pdf",
+      "verification_status": "verified",
+      "applies_to": "30-day statutory deadline for PIO to respond"
+    },
+    {
+      "id": "RTI-2005-S7-6",
+      "act": "Right to Information Act, 2005",
+      "section": "7(6)",
+      "title": "Free information on delayed response",
+      "text": "Notwithstanding anything contained in sub-section (5), the person making request for the information shall be provided the information free of charge where a public authority fails to comply with the time limits specified in sub-section (1).",
+      "source_url": "https://rti.gov.in/rti-act.pdf",
+      "verification_status": "verified",
+      "applies_to": "No fee owed if PIO misses the 30-day deadline"
+    },
+    {
+      "id": "RTI-2005-S4-1-b",
+      "act": "Right to Information Act, 2005",
+      "section": "4(1)(b)",
+      "title": "Proactive disclosure obligations",
+      "text": "Every public authority shall publish within one hundred and twenty days from the enactment of this Act — (iv) the norms set by it for the discharge of its functions; (v) the rules, regulations, instructions, manuals and records, held by it or under its control or used by its employees for discharging its functions.",
+      "source_url": "https://rti.gov.in/rti-act.pdf",
+      "verification_status": "verified",
+      "applies_to": "Requesting the department's published Citizen Charter"
+    },
+    {
+      "id": "RTI-2005-S19-1",
+      "act": "Right to Information Act, 2005",
+      "section": "19(1)",
+      "title": "First appeal",
+      "text": "Any person who does not receive a decision within the time specified in sub-section (1) or clause (a) of sub-section (3) of section 7, or is aggrieved by a decision of the Central Public Information Officer or State Public Information Officer, as the case may be, may within thirty days from the expiry of such period or from the receipt of such a decision prefer an appeal to such officer who is senior in rank to the Central Public Information Officer or State Public Information Officer as the case may be, in each public authority.",
+      "source_url": "https://rti.gov.in/rti-act.pdf",
+      "verification_status": "verified",
+      "applies_to": "Right to appeal if PIO misses deadline or denies request"
+    },
+    {
+      "id": "RTI-2005-S20-1",
+      "act": "Right to Information Act, 2005",
+      "section": "20(1)",
+      "title": "Penalty for delay",
+      "text": "Where the Central Information Commission or the State Information Commission, as the case may be, at the time of deciding any complaint or appeal is of the opinion that the Central Public Information Officer or the State Public Information Officer, as the case may be, has, without any reasonable cause, refused to receive an application for information or has not furnished information within the time specified under sub-section (1) of section 7 ... it shall impose a penalty of two hundred and fifty rupees each day till application is received or information is furnished, so however, the total amount of such penalty shall not exceed twenty-five thousand rupees.",
+      "source_url": "https://rti.gov.in/rti-act.pdf",
+      "verification_status": "verified",
+      "applies_to": "Financial penalty on PIO for unjustified delay"
+    },
+    {
+      "id": "RTI-2005-S6-3",
+      "act": "Right to Information Act, 2005",
+      "section": "6(3)",
+      "title": "Transfer of misdirected application",
+      "text": "Where an application is made to a public authority requesting for information,— (i) which is held by another public authority; or (ii) the subject matter of which is more closely connected with the functions of another public authority, the public authority, to which such application is made, shall transfer the application or such part of it as may be appropriate to that other public authority and inform the applicant immediately about such transfer: Provided that the transfer of an application pursuant to this sub-section shall be made as soon as practicable but in no case later than five days from the date of receipt of the application.",
+      "source_url": "https://rti.gov.in/rti-act.pdf",
+      "verification_status": "needs_verification",
+      "applies_to": "Instructing PIO to transfer application if wrong department"
+    },
+    {
+      "id": "RTI-2005-S7-5",
+      "act": "Right to Information Act, 2005",
+      "section": "7(5)",
+      "title": "Fee for printed/electronic access, BPL exemption",
+      "text": "Where access to information is to be provided in the printed or in any electronic format, the applicant shall, subject to sub-section (6), pay such fee as may be prescribed: Provided that the fee prescribed under sub-section (1) of section 6 and sub-sections (1) and (5) of section 7 shall be reasonable and no such fee shall be charged from the persons who are of below poverty line as may be determined by the appropriate Government.",
+      "source_url": "https://rti.gov.in/rti-act.pdf",
+      "verification_status": "needs_verification",
+      "applies_to": "BPL applicant fee exemption citation in RTI application"
+    }
+  ],
+  "citizen_charters": [
+    {
+      "id": "TN-AGRI-CHARTER",
+      "department": "Department of Agriculture and Farmers Welfare, Tamil Nadu",
+      "url_hint": "https://www.tnagrisnet.tn.gov.in/",
+      "stipulated_days_default": 60,
+      "verification_status": "needs_verification",
+      "note": "Confirm exact timeline from department Citizen Charter PDF."
+    },
+    {
+      "id": "TN-EDU-CHARTER",
+      "department": "Department of Higher Education, Tamil Nadu",
+      "url_hint": "https://tnhighereducation.org/",
+      "stipulated_days_default": 45,
+      "verification_status": "needs_verification",
+      "note": "Confirm exact timeline from department Citizen Charter."
+    },
+    {
+      "id": "TN-SOCWEL-CHARTER",
+      "department": "Department of Social Welfare and Women Empowerment, Tamil Nadu",
+      "url_hint": "https://www.tn.gov.in/department/22",
+      "stipulated_days_default": 90,
+      "verification_status": "needs_verification",
+      "note": "Confirm exact timeline from department Citizen Charter."
+    }
+  ]
+}

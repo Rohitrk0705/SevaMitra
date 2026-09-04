@@ -1,0 +1,74 @@
+RIGHT TO INFORMATION APPLICATION
+Under Section 6(1) of the Right to Information Act, 2005
+
+Date: {{ today }}
+Place: {{ applicant_city }}
+
+To,
+The Public Information Officer,
+{{ department_name }},
+{{ department_address }}
+
+Subject: Request for information under Section 6(1) of the RTI Act, 2005
+regarding application {{ app_id }} for {{ scheme_name }}.
+
+Sir/Madam,
+
+I, {{ applicant_name }}, resident of {{ applicant_address }}, hereby
+request the following information under Section 6(1) of the Right to
+Information Act, 2005, in respect of my pending application:
+
+  Application ID   : {{ app_id }}
+  Scheme           : {{ scheme_name }} ({{ scheme_id }})
+  Filed on         : {{ submission_date }}
+  Days elapsed     : {{ days_elapsed }}
+  Charter timeline : {{ charter_days }} days
+  ({{ days_overdue }} days beyond stipulated timeline)
+
+INFORMATION SOUGHT:
+
+  1. The current stage of processing of the above application, along with
+     date-wise movement records.
+  2. The name and designation of the officer(s) currently handling the
+     application.
+  3. The reason(s) for the delay in processing beyond the timeline of
+     {{ charter_days }} days stipulated in the Citizen Charter of
+     {{ department_name }}.
+  4. The expected date by which a decision on the application will be
+     communicated to the applicant.
+  5. A copy of the Citizen Charter of {{ department_name }} in force on
+     the date of my application, as required to be proactively disclosed
+     under Section 4(1)(b)(iv) of the RTI Act, 2005.
+  6. The number of applications received under {{ scheme_name }} in the
+     last 12 months, and the average processing time thereof.
+
+MODE OF INFORMATION: I would like the information in the form of
+photocopies / soft copy sent to the email address below.
+
+APPLICATION FEE: Rs. 10/- enclosed by way of Indian Postal Order.
+{% if bpl_applicant %}
+I am a person Below Poverty Line and am therefore exempt from the fee
+under the second proviso to Section 7(5) of the RTI Act, 2005. A copy of
+my BPL certificate is enclosed.
+{% endif %}
+
+DECLARATION: I hereby declare that the information sought does not fall
+within the restrictions contained in Sections 8 and 9 of the RTI Act,
+2005, and that I am a citizen of India.
+
+If the information sought does not pertain to your department, kindly
+transfer this application under Section 6(3) of the RTI Act, 2005 to the
+concerned public authority within five days.
+
+I request that the information be furnished within thirty days as
+mandated by Section 7(1) of the RTI Act, 2005. In the event of default,
+the information shall be provided free of charge as per Section 7(6),
+without prejudice to my right to prefer an appeal under Section 19(1) and
+to seek imposition of penalty under Section 20(1) of the said Act.
+
+Yours faithfully,
+
+{{ applicant_name }}
+{{ applicant_address }}
+Phone: {{ applicant_phone }}
+Email: {{ applicant_email }}
